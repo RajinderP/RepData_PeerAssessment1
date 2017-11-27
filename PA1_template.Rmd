@@ -5,21 +5,37 @@ output:
     keep_md: true
 ---
 
-
+  
 ## Loading and preprocessing the data
+This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day. This data can be downloaded from:
 
+https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip
 
+This data is read into from a csv file into a data frame with dates converted for the date column.
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(lattice)
+
+#Code for reading in the dataset and/or processing the data
+setwd("C:\\Users\\bhutta\\Desktop\\Coursera\\reproducible research\\wk 2 ass")
+df<-read.csv("activity.csv")
+df$date <- as.Date(df$date, "%Y-%m-%d")
+
+```
 
 ## What is mean total number of steps taken per day?
-
+For each day where data exists, the total number of steps are taken over all the intervals in that day. A histogram is created to look at the distribution of these values. The mean and median values are also calculated - these are fairly close and suggest a near symetrical distribution which is also suggested by the histogram.
 
 
 ## What is the average daily activity pattern?
-
+For each time interval, the average number of steps are calculated over all the days for which values exist. The interval which gives the maximum value is then also extracted.
 
 
 ## Imputing missing values
-
+Where data is missing, the mean value of the interval is now used to create a full dataset. The histogram above is now recreated with these updated values - and it can be seen that the mean and median values have fallen.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+The data is split into weekdays and weekends, where the averages of each interval are displayed in the graphs below. It can be seen that during the middle of the day, the average number of steps is higher on a weekend than the weekday - this could perhaps be explained by the fact that many of these people sit down while working.
